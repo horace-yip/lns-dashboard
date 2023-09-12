@@ -7,15 +7,20 @@ from datetime import datetime
 from config import Config
 
 NUMBER_FORMAT = "{:,.0f}"
+FIRST_YEAR = 2019
 CURRENT_YEAR = datetime.now().year
 PREVIOUS_YEAR = CURRENT_YEAR - 1
 
-YEARS = {
-    str(CURRENT_YEAR): CURRENT_YEAR,
-    str(PREVIOUS_YEAR): PREVIOUS_YEAR,
-    "2020": 2020,
-    "2019": 2019
-}
+YEARS = {}
+for year in range(FIRST_YEAR, CURRENT_YEAR + 1):
+    YEARS[str(year)] = year
+
+# YEARS = {
+#     str(CURRENT_YEAR): CURRENT_YEAR,
+#     str(PREVIOUS_YEAR): PREVIOUS_YEAR,
+#     "2020": 2020,
+#     "2019": 2019
+# }
 year_scope = CURRENT_YEAR
 
 config = cp.ConfigParser()
