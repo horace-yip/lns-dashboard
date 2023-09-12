@@ -42,7 +42,7 @@ def revenue_vs_cost(cn: db.connection):
         cursor.close()
         df.rename(columns={0: "Year", 1: "Type", 2: "Amount"}, inplace=True)
         fig = px.line(df, x="Year", y="Amount", color="Type", hover_data=[
-            "Amount"], labels={"Amount": "Amount (PHP)"}, markers=True)
+            "Amount"], labels={"Amount": LABEL_AMOUNT}, markers=True)
         fig = Config.set_chart_config(fig)
 
         st.plotly_chart(fig, use_container_width=True)
@@ -62,7 +62,7 @@ def annual_revenue_by_loc(cn: db.connection):
         df.rename(columns={0: "Year", 1: "Location",
                   2: "Amount"}, inplace=True)
         fig = px.line(df, x="Year", y="Amount", color="Location", hover_data=[
-            "Amount"], labels={"Amount": "Amount (PHP)"}, markers=True)
+            "Amount"], labels={"Amount": LABEL_AMOUNT}, markers=True)
         fig = Config.set_chart_config(fig)
         st.plotly_chart(fig, use_container_width=True)
     else:

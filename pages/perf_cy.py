@@ -4,7 +4,7 @@ import mysql.connector as db
 import pandas as pd
 import plotly.express as px
 from datetime import datetime
-from config import Config
+from config import LABEL_AMOUNT, Config
 
 NUMBER_FORMAT = "{:,.0f}"
 FIRST_YEAR = 2019
@@ -15,19 +15,12 @@ YEARS = {}
 for year in range(FIRST_YEAR, CURRENT_YEAR + 1):
     YEARS[str(year)] = year
 
-# YEARS = {
-#     str(CURRENT_YEAR): CURRENT_YEAR,
-#     str(PREVIOUS_YEAR): PREVIOUS_YEAR,
-#     "2020": 2020,
-#     "2019": 2019
-# }
 year_scope = CURRENT_YEAR
 
 config = cp.ConfigParser()
 config.read("sql.ini")
 
 # Layout
-
 
 def show(cn: db.connection):
     global year_scope
@@ -155,7 +148,7 @@ def chart_monthly_revenue_vs_expenses(cn: db.connection, year_scope: int):
         df.rename(columns={0: "Month", 1: "Type",
                            2: "Amount"}, inplace=True)
         fig = px.line(df, x="Month", y="Amount", color="Type", hover_data=[
-            "Amount"], labels={"Amount": "Amount (PHP)"}, markers=True)
+            "Amount"], labels={"Amount": LABEL_AMOUNT}, markers=True)
         fig = Config.set_chart_config(fig)
         st.plotly_chart(fig, use_container_width=True)
     else:
@@ -174,7 +167,7 @@ def chart_monthly_revenue_by_loc(cn: db.connection, year_scope: int):
         df.rename(columns={0: "Month", 1: "Location",
                            2: "Amount"}, inplace=True)
         fig = px.line(df, x="Month", y="Amount", color="Location", hover_data=[
-            "Amount"], labels={"Amount": "Amount (PHP)"}, markers=True)
+            "Amount"], labels={"Amount": LABEL_AMOUNT}, markers=True)
         fig = Config.set_chart_config(fig)
         st.plotly_chart(fig, use_container_width=True)
     else:
@@ -216,7 +209,7 @@ def chart_future_revenue(cn: db.connection, year_scope: int):
         #df["Month"] = pd.to_datetime(df["Month"].dt.strftime("%b-%Y"))
         #df.style.format({"Month": lambda t: t.strftime("%m-%Y")})
         fig = px.line(df, x="Month", y="Amount", hover_data=[
-                      "Amount"], labels={"Amount": "Amount (PHP)"}, markers=True)
+                      "Amount"], labels={"Amount": LABEL_AMOUNT}, markers=True)
         fig = Config.set_chart_config(fig, xtick=0)
         st.plotly_chart(fig, use_container_width=True)
     else:

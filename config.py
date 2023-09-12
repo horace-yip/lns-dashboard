@@ -1,6 +1,7 @@
 import streamlit as st
 import plotly.express as px
 
+LABEL_AMOUNT = "Amount (PHP)"
 
 class Config:
 

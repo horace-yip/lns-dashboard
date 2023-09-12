@@ -3,7 +3,7 @@ import configparser as cp
 import mysql.connector as db
 import pandas as pd
 import plotly.express as px
-from config import Config
+from config import LABEL_AMOUNT, Config
 
 TOP_SUPPLIER_LIMIT = 10
 
@@ -74,7 +74,7 @@ def major_cost_by_catg(cn: db.connection):
         df.rename(columns={0: "Year", 1: "Category",
                   2: "Amount"}, inplace=True)
         fig = px.line(df, x="Year", y="Amount", color="Category", hover_data=[
-            "Amount"], labels={"Amount": "Amount (PHP)"}, markers=True)
+            "Amount"], labels={"Amount": LABEL_AMOUNT}, markers=True)
         fig = Config.set_chart_config(fig)
         st.plotly_chart(fig, use_container_width=True)
     else:
@@ -98,7 +98,7 @@ def major_non_cogs_by_catg(cn: db.connection):
         df.rename(columns={0: "Year", 1: "Category",
                   2: "Amount"}, inplace=True)
         fig = px.line(df, x="Year", y="Amount", color="Category", hover_data=[
-            "Amount"], labels={"Amount": "Amount (PHP)"}, markers=True)
+            "Amount"], labels={"Amount": LABEL_AMOUNT}, markers=True)
         fig = Config.set_chart_config(fig)
         st.plotly_chart(fig, use_container_width=True)
     else:
@@ -122,7 +122,7 @@ def major_cogs_subtypes(cn: db.connection):
         df.rename(columns={0: "Year", 1: "Type",
                   2: "Amount"}, inplace=True)
         fig = px.line(df, x="Year", y="Amount", color="Type", hover_data=[
-            "Amount"], labels={"Amount": "Amount (PHP)"}, markers=True)
+            "Amount"], labels={"Amount": LABEL_AMOUNT}, markers=True)
         fig = Config.set_chart_config(fig)
         st.plotly_chart(fig, use_container_width=True)
     else:
@@ -178,7 +178,7 @@ def major_suppliers_by_month(cn: db.connection):
         df.rename(columns={0: "Year", 1: "Month",
                   2: "Amount"}, inplace=True)
         fig = px.line(df, x="Month", y="Amount", color="Year", hover_data=[
-            "Amount"], labels={"Amount": "Amount (PHP)"}, markers=True)
+            "Amount"], labels={"Amount": LABEL_AMOUNT}, markers=True)
         fig = Config.set_chart_config(fig)
         st.plotly_chart(fig, use_container_width=True)
     else:
